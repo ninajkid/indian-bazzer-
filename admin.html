@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Staff Orders | Indian Bazaar + Desi Bites</title>
+    <meta name="description" content="Password protected order manager for Indian Bazaar and Desi Bites.">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body data-page="admin">
+    <header class="site-header admin-topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">IB</span>
+        <span>
+          <strong>Staff orders</strong>
+          <small>Indian Bazaar + Desi Bites</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="Staff navigation">
+        <a href="index.html">Storefront</a>
+      </nav>
+      <button class="secondary-button compact" type="button" data-sign-out hidden>Sign out</button>
+    </header>
+
+    <main class="admin-shell">
+      <section class="auth-panel" data-auth-panel>
+        <div class="auth-card">
+          <p class="eyebrow">Staff only</p>
+          <h1 data-auth-title>Unlock orders</h1>
+          <p data-auth-copy>
+            Enter the staff password to view and update customer pickup orders.
+          </p>
+
+          <form data-login-form>
+            <label>
+              Password
+              <input name="password" type="password" autocomplete="current-password" required>
+            </label>
+            <button class="primary-button" type="submit">Open orders</button>
+            <p class="form-message" data-login-message role="status"></p>
+          </form>
+
+          <form data-setup-form hidden>
+            <label>
+              Create staff password
+              <input name="password" type="password" autocomplete="new-password" minlength="6" required>
+            </label>
+            <label>
+              Confirm password
+              <input name="confirm" type="password" autocomplete="new-password" minlength="6" required>
+            </label>
+            <button class="primary-button" type="submit">Save password</button>
+            <p class="form-message" data-setup-message role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="admin-dashboard" data-admin-dashboard hidden>
+        <div class="admin-heading">
+          <div>
+            <p class="eyebrow">Order manager</p>
+            <h1>Today at a glance</h1>
+          </div>
+          <div class="admin-actions">
+            <button class="secondary-button" type="button" data-seed-orders>Add sample orders</button>
+            <button class="secondary-button" type="button" data-export-orders>Export CSV</button>
+          </div>
+        </div>
+
+        <div class="prototype-alert">
+          This GitHub Pages version stores orders in this browser for the first demo.
+          Connect a secure backend before taking live customer orders.
+        </div>
+
+        <div class="stats-grid" data-stats-grid></div>
+
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <div>
+              <h2>Orders</h2>
+              <p>Update status as the kitchen and grocery team work through pickup orders.</p>
+            </div>
+            <div class="admin-filters">
+              <input data-admin-search type="search" placeholder="Search name, phone, item...">
+              <select data-status-filter aria-label="Filter order status">
+                <option value="All">All statuses</option>
+                <option value="New">New</option>
+                <option value="Preparing">Preparing</option>
+                <option value="Ready">Ready</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="orders-list" data-orders-list></div>
+        </section>
+
+        <section class="admin-grid">
+          <form class="admin-card" data-manual-order-form>
+            <h2>Phone or counter order</h2>
+            <label>
+              Customer name
+              <input name="name" required>
+            </label>
+            <label>
+              Phone
+              <input name="phone" required>
+            </label>
+            <label>
+              Pickup time
+              <input name="pickup" type="datetime-local" required>
+            </label>
+            <label>
+              Items and notes
+              <textarea name="items" rows="5" required placeholder="Example: 2 chicken biryani, 1 samosa plate, 10 lb basmati rice"></textarea>
+            </label>
+            <label>
+              Estimated total
+              <input name="total" type="number" min="0" step="0.01" placeholder="0.00">
+            </label>
+            <button class="primary-button" type="submit">Save manual order</button>
+            <p class="form-message" data-manual-message role="status"></p>
+          </form>
+
+          <form class="admin-card" data-password-form>
+            <h2>Change staff password</h2>
+            <label>
+              Current password
+              <input name="current" type="password" autocomplete="current-password" required>
+            </label>
+            <label>
+              New password
+              <input name="next" type="password" autocomplete="new-password" minlength="6" required>
+            </label>
+            <button class="secondary-button" type="submit">Update password</button>
+            <p class="form-message" data-password-message role="status"></p>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

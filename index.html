@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Indian Bazaar + Desi Bites | Plymouth, MN</title>
+    <meta
+      name="description"
+      content="Order Indian groceries from Indian Bazaar and pickup-ready meals from Desi Bites in Plymouth, Minnesota."
+    >
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body data-page="shop">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Indian Bazaar and Desi Bites home">
+        <span class="brand-mark">IB</span>
+        <span>
+          <strong>Indian Bazaar</strong>
+          <small>with Desi Bites</small>
+        </span>
+      </a>
+
+      <form class="search-form" role="search">
+        <label class="sr-only" for="site-search">Search groceries and menu</label>
+        <input id="site-search" type="search" placeholder="Search groceries, biryani, snacks...">
+      </form>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#groceries">Grocery</a>
+        <a href="#restaurant">Restaurant</a>
+        <a href="#deals">Deals</a>
+        <a href="admin.html">Staff</a>
+      </nav>
+
+      <button class="cart-button" type="button" data-open-cart aria-label="Open cart">
+        <span>Cart</span>
+        <strong data-cart-count>0</strong>
+      </button>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Plymouth, Minnesota pickup</p>
+          <h1>Indian groceries and Desi Bites meals in one simple order.</h1>
+          <p>
+            Shop pantry staples, snacks, frozen favorites, and fresh restaurant dishes
+            together. Place one pickup order for Indian Bazaar and Desi Bites.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#shop">Start order</a>
+            <a class="secondary-link" href="#location">Store info</a>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-label="Indian groceries and restaurant dishes">
+          <img
+            src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80"
+            alt="Colorful Indian spices and ingredients"
+          >
+          <div class="hero-card">
+            <strong>Pickup today</strong>
+            <span>Groceries, snacks, chaat, biryani, curries</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-strip" aria-label="Store highlights">
+        <article>
+          <strong>Indian Bazaar</strong>
+          <span>Rice, atta, spices, frozen foods, snacks, sweets</span>
+        </article>
+        <article>
+          <strong>Desi Bites</strong>
+          <span>Fresh chaat, biryani, curries, dosas, drinks</span>
+        </article>
+        <article>
+          <strong>One pickup</strong>
+          <span>Order grocery and restaurant items together</span>
+        </article>
+      </section>
+
+      <section class="feature-band" id="deals">
+        <div>
+          <p class="eyebrow">Weekly picks</p>
+          <h2>Easy deals for dinner and pantry restock.</h2>
+        </div>
+        <div class="deal-grid">
+          <article class="deal-card">
+            <strong>Biryani night</strong>
+            <span>Chicken biryani, samosas, and mango lassi</span>
+          </article>
+          <article class="deal-card">
+            <strong>Family grocery run</strong>
+            <span>Basmati rice, atta, masala, naan, and snacks</span>
+          </article>
+          <article class="deal-card">
+            <strong>Vegetarian favorites</strong>
+            <span>Paneer tikka masala, chole bhature, and sweets</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="shop-section" id="shop">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Order online</p>
+            <h2>Shop Indian Bazaar and Desi Bites</h2>
+          </div>
+          <p>Sample menu and grocery items are included. Replace them with the real store list when ready.</p>
+        </div>
+
+        <div class="shop-tools">
+          <div class="category-tabs" data-category-tabs aria-label="Product categories"></div>
+          <select id="sort-products" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+          </select>
+        </div>
+
+        <div class="product-grid" data-product-grid></div>
+      </section>
+
+      <section class="split-section" id="groceries">
+        <div>
+          <p class="eyebrow">Indian Bazaar</p>
+          <h2>Grocery pickup made simple.</h2>
+          <p>
+            Keep high-demand staples organized by category, feature weekly specials,
+            and let customers build a pickup cart from grocery and restaurant items.
+          </p>
+        </div>
+        <img
+          src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1000&q=80"
+          alt="Rice grains and pantry staples"
+        >
+      </section>
+
+      <section class="split-section reverse" id="restaurant">
+        <img
+          src="https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=1000&q=80"
+          alt="Biryani served in a bowl"
+        >
+        <div>
+          <p class="eyebrow">Desi Bites</p>
+          <h2>Fresh meals ready for pickup.</h2>
+          <p>
+            Customers can add chaat, biryani, curries, dosas, desserts, and drinks
+            to the same order as their Indian Bazaar groceries.
+          </p>
+        </div>
+      </section>
+
+      <section class="location-section" id="location">
+        <div>
+          <p class="eyebrow">Visit us</p>
+          <h2>Plymouth, Minnesota</h2>
+          <p>
+            Add the exact address, phone number, hours, and map link here before
+            publishing for customers.
+          </p>
+        </div>
+        <div class="info-list">
+          <span><strong>Pickup:</strong> Grocery and restaurant orders</span>
+          <span><strong>Hours:</strong> Add store hours</span>
+          <span><strong>Phone:</strong> Add phone number</span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="cart-drawer" data-cart-drawer aria-label="Shopping cart" aria-hidden="true">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Pickup order</p>
+          <h2>Your cart</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+
+      <div class="cart-items" data-cart-items></div>
+
+      <div class="cart-summary">
+        <div>
+          <span>Estimated total</span>
+          <strong data-cart-total>$0.00</strong>
+        </div>
+        <small>Final pricing can be confirmed by the store at pickup.</small>
+      </div>
+
+      <form class="checkout-form" data-checkout-form>
+        <h3>Pickup details</h3>
+        <label>
+          Name
+          <input name="name" autocomplete="name" required>
+        </label>
+        <label>
+          Phone
+          <input name="phone" autocomplete="tel" required>
+        </label>
+        <label>
+          Pickup time
+          <input name="pickup" type="datetime-local" required>
+        </label>
+        <label>
+          Notes
+          <textarea name="notes" rows="3" placeholder="Spice level, substitutions, grocery notes..."></textarea>
+        </label>
+        <button class="primary-button" type="submit">Place pickup order</button>
+      </form>
+    </aside>
+
+    <div class="scrim" data-scrim hidden></div>
+
+    <dialog class="order-dialog" data-order-dialog>
+      <h2>Order saved</h2>
+      <p data-order-message></p>
+      <div class="dialog-actions">
+        <button class="secondary-button" type="button" data-copy-order>Copy order</button>
+        <button class="primary-button" type="button" data-close-dialog>Done</button>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <span>Indian Bazaar + Desi Bites, Plymouth, MN</span>
+      <a href="admin.html">Staff orders</a>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
