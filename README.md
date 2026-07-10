@@ -12,13 +12,24 @@ This is a GitHub Pages-ready website for Indian Bazaar and Desi Bites in Plymout
 - Order status updates: New, Preparing, Ready, Completed, Cancelled
 - Manual order entry for phone or counter orders
 - CSV export for saved orders
+- Google Apps Script order submission to a connected Google Sheet
 - GitHub Pages publishing workflow
 
 ## Important live-order note
 
-This first version is a static GitHub Pages site. It stores orders in the browser using local storage, which is useful for a demo or in-store prototype, but it is not enough for real customer ordering across different devices.
+This first version is a static GitHub Pages site. Customer checkout sends orders to the configured Google Apps Script URL, and the site also stores a local browser backup for demos and staff testing.
 
-Before using it for live public ordering, connect a secure backend such as Firebase, Supabase, Google Sheets with an API, Square, Toast, or a custom server. A real backend is also needed for truly private staff passwords.
+The current Apps Script URL is used for order submissions but does not expose a readable order-list API for the staff page. The staff page still shows orders saved on the current device. Use the Google Sheet as the central live order record, or update the Apps Script later to support reading and updating orders from the admin page.
+
+A real backend is still recommended for stronger staff login security, payment processing, and cross-device admin status updates.
+
+## Google Sheet connection
+
+Orders are sent to this Apps Script endpoint from `assets/app.js`:
+
+`https://script.google.com/macros/s/AKfycbzbgrhU8O-IyvLVq_dFtHCib2iBx6b3ovlY1iwUyY9KZJTioMKwqpUxjhUBMem5fhE4Aw/exec`
+
+The checkout posts these fields: `action`, `orderId`, `createdAt`, `status`, `source`, `customerName`, `customerPhone`, `pickup`, `pickupDisplay`, `notes`, `itemSummary`, `itemsJson`, and `total`.
 
 ## Publish on GitHub Pages
 

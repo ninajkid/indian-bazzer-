@@ -2,6 +2,8 @@ const ORDER_KEY = "indianBazaar.orders.v1";
 const CART_KEY = "indianBazaar.cart.v1";
 const PASSWORD_KEY = "indianBazaar.staffPasswordHash.v1";
 const AUTH_KEY = "indianBazaar.staffUnlocked.v1";
+const GOOGLE_SHEET_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbzbgrhU8O-IyvLVq_dFtHCib2iBx6b3ovlY1iwUyY9KZJTioMKwqpUxjhUBMem5fhE4Aw/exec";
 
 const products = [
   {
@@ -172,6 +174,46 @@ function orderTotal(items) {
 function orderId() {
   const stamp = Date.now().toString(36).toUpperCase();
   return `IB-${stamp.slice(-6)}`;
+}
+
+function sheetPayload(order) {
+  return {
+    action: "createOrder",
+    orderId: order.id,
+    createdAt: order.createdAt,
+    status: order.status,
+    source: order.source,
+    customerName: order.customer.name,
+    customerPhone: order.customer.phone,
+    pickup: order.pickup,
+    pickupDisplay: formatDateTime(order.pickup),
+    notes: order.notes || "",
+    itemSummary: itemSummary(order.items),
+    itemsJson: JSON.stringify(order.items),
+    total: Number(order.total || 0).toFixed(2)
+  };
+}
+
+async function sendOrderToGoogleSheet(order) {
+  if (!GOOGLE_SHEET_ENDPOINT) {
+    return { ok: false, reason: "missing-endpoint" };
+  }
+
+  const body = new URLSearchParams();
+  Object.entries(sheetPayload(order)).forEach(([key, value]) => {
+    body.append(key, value);
+  });
+
+  try {
+    await fetch(GOOGLE_SHEET_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      body
+    });
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, reason: error.message };
+  }
 }
 
 function itemSummary(items) {
@@ -374,12 +416,17 @@ function initShop() {
   search.addEventListener("input", renderProducts);
   sort.addEventListener("change", renderProducts);
 
-  checkoutForm.addEventListener("submit", (event) => {
+  checkoutForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!cart.length) {
       openCart();
       return;
     }
+
+    const submitButton = checkoutForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending order...";
 
     const form = new FormData(checkoutForm);
     const newOrder = {
@@ -399,8 +446,11 @@ function initShop() {
 
     const orders = getOrders();
     saveOrders([newOrder, ...orders]);
+    const sheetResult = await sendOrderToGoogleSheet(newOrder);
     lastOrderText = buildOrderText(newOrder);
-    orderMessage.textContent = `${newOrder.id} was saved. Staff can see it on the orders page on this device.`;
+    orderMessage.textContent = sheetResult.ok
+      ? `${newOrder.id} was sent to the Google Sheet link and saved as a local backup.`
+      : `${newOrder.id} was saved as a local backup, but the Google Sheet did not receive it. Please copy the order and check the sheet.`;
     cart = [];
     persistCart();
     checkoutForm.reset();
@@ -408,6 +458,8 @@ function initShop() {
     renderCart();
     closeCart();
     dialog.showModal();
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
   });
 
   copyButton.addEventListener("click", async () => {
@@ -581,7 +633,7 @@ function initAdmin() {
     renderAdmin();
   });
 
-  manualForm.addEventListener("submit", (event) => {
+  manualForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = new FormData(manualForm);
     const rawItems = String(form.get("items") || "").trim();
@@ -610,9 +662,12 @@ function initAdmin() {
       total
     };
     saveOrders([newOrder, ...getOrders()]);
+    const sheetResult = await sendOrderToGoogleSheet(newOrder);
     manualForm.reset();
     setMinPickupTime();
-    manualMessage.textContent = `${newOrder.id} saved.`;
+    manualMessage.textContent = sheetResult.ok
+      ? `${newOrder.id} saved and sent to the Google Sheet link.`
+      : `${newOrder.id} saved locally, but the Google Sheet did not receive it.`;
     renderAdmin();
   });
 
